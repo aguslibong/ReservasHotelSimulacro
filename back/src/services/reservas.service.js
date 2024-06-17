@@ -4,6 +4,7 @@ import sequelize from "../models/database.js"
 const getAll = async () => {
     const resultado = await sequelize.models.Reservas.findAll({
         attributes: [
+            'Id',
             'Dni',
             'FechaIngreso',
             'FechaSalida',
@@ -14,7 +15,7 @@ const getAll = async () => {
     })
     return resultado.map(p => {
         return {
-            id: p.dataValues.Id,
+            Id: p.dataValues.Id,
             Dni: p.dataValues.Dni,
             FechaIngreso: p.dataValues.FechaIngreso,
             FechaSalida: p.dataValues.FechaSalida,

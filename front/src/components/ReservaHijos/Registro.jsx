@@ -1,40 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import service from '../services/reservas.services.js';
-import Consulta from './Consulta.jsx';
 
-export default function Registro() {
-  const [action, setAction] = useState('R');
-  const [rows, setRows] = useState([]);
+import { useForm } from 'react-hook-form';
+import service from '../../services/reservas.services.js';
+
+
+export default function Registro({setAction, loadData}) {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  useEffect(() => {
-    loadData();
-  }, []);
-
-  const loadData = async () => {
-    const data = await service.getReservas();
-    setRows(data);
-  };
-
   const onSubmit = async (data) => {
-    console.log(data)
-    // Llamar a saveReserva del servicio de reservas
     await service.saveReserva(data);
-    loadData();
+    loadData()
     setAction('C');
   };
 
-  const onVolver = () => {
-    setAction('R');
-  };
-
-  
 
   return (
     <div className='container_app'>
-      {
-        action === 'R' && (
           <form onSubmit={handleSubmit(onSubmit)}>
             <h5>Registro de Reserva de estadía</h5>
             <div className="form-group">
@@ -67,15 +47,12 @@ export default function Registro() {
               <input type="number" className="form-control" id="Huespedes" {...register("Huespedes", { required: 'Este campo es requerido', min: { value: 1, message: 'Debe haber al menos un huésped' } })} />
               {errors.Huespedes && <span className='error'>{errors.Huespedes.message}</span>}
             </div>
-            <button type="submit" className="btn btn-primary mt-3">Registrar</button>
+            <div>
+              <button type="submit" className="btn btn-primary mt-3 me-2">Registrar</button>
+              <button type="button" className="btn btn-danger mt-3" onClick={() => setAction('C')}>Cancelar</button>
+            </div>
           </form>
-        )
-      }
-      {
-        action !== 'R' && (
-          <Consulta rows={rows} onVolver={onVolver} onRecargar={loadData} />
-        )
-      }
+          
     </div>
   );
 }

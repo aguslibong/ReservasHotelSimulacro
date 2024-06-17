@@ -5,8 +5,9 @@ import {
   Route
 } from 'react-router-dom';
 import Menu from './components/Menu';
-import Registro from './components/Registro';
-import Consulta from './components/Consulta';
+import Registro from './components/ReservaHijos/Registro';
+import Consulta from './components/ReservaHijos/Consulta';
+import Reservas from './components/Reservas';
 import './App.css';
 
 function App() {
@@ -15,8 +16,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Menu />} />
-          <Route path='/registro' element={<Registro />} />
-          <Route path='/consulta' element={<Consulta />}/>
+          <Route path='/reservas' element={<Reservas />} />
         </Routes>
       </BrowserRouter>
     </div>

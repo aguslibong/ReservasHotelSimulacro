@@ -7,7 +7,9 @@ const getReservas = async() => {
             throw new Error(`HTTP error! status: ${res.status}`);
         }
         const data = await res.json();
+        console.log(data)
         return data;
+        
     } catch (error) {
         console.error('Error fetching reservas:', error);
         return [];
