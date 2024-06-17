@@ -55,6 +55,27 @@ const deleteReserva = async (reserva) => {
     }
 }
 
+const updateReserva = async (reserva) => {
+    console.log(reserva)
+    try {
+        const requestOptions = {
+            method: 'UPDATE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(reserva)
+        };
+
+        const res = await fetch(URL, requestOptions);
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.error('Error Elminando reserva:', error);
+        return null;
+    }
+}
 
 
-export default {getReservas,saveReserva,deleteReserva}
+
+export default {getReservas,saveReserva,deleteReserva,updateReserva}

@@ -2,12 +2,17 @@ import React from 'react';
 import './Consulta.css'
 import service from '../services/reservas.services.js'
 
-const Consulta = ({rows, onVolver, onDelete}) => {
+const Consulta = ({rows, onVolver, loadData}) => {
     
   
-    const OnclickDelete =( reserva )=>{
+    const onClickDelete =( reserva )=>{
       service.deleteReserva(reserva)
-      onDelete()
+      loadData()
+    }
+
+    const onClickUpdate =( reserva )=>{
+      service.updateReserva(reserva)
+      loadData()
     }
     
     const tbody = rows.map(e => 
@@ -18,8 +23,8 @@ const Consulta = ({rows, onVolver, onDelete}) => {
             <td>{e.TipoEstadia}</td>
             <td>{e.Huespedes}</td>
             <td>
-              <button type="button" className ="btn btn-secondary" >Modificar</button>
-              <button type="button" className="btn btn-danger" onClick={() => OnclickDelete(e)}>Eliminar</button>
+              <button type="button" className ="btn btn-secondary" onClick={()=> onClickUpdate(e)}>Modificar</button>
+              <button type="button" className="btn btn-danger" onClick={() => onClickDelete(e)}>Eliminar</button>
             </td>
         </tr>
     )

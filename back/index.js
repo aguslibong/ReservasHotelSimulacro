@@ -27,6 +27,20 @@ app.post('/reservas', async (req, res) => {
     }
 });
 
+app.delete('/reservas', async (req, res) => {
+    try{
+       const reservaId = await service.deleteReserva(req.body)
+    return res.json(reservaId);
+    }catch(error){
+        console.log(error)
+        res.status(500).send({mensaje: 'Ha ocurrido un error interno.'})
+    }
+});
+
+
+
+
+
 app.listen(3001, () => {
     console.log("Servidor iniciado en el puerto 3001");
 });

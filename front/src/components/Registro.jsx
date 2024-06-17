@@ -29,9 +29,7 @@ export default function Registro() {
     setAction('R');
   };
 
-  const onDelete = () => {
-    loadData();
-  }
+  
 
   return (
     <div className='container_app'>
@@ -75,7 +73,7 @@ export default function Registro() {
       }
       {
         action !== 'R' && (
-          <Consulta rows={rows} onVolver={onVolver} onDelete={onDelete} />
+          <Consulta rows={rows} onVolver={onVolver} onRecargar={loadData} />
         )
       }
     </div>
