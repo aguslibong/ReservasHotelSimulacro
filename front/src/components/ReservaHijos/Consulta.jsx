@@ -1,16 +1,14 @@
 import React from 'react';
 import service from '../../services/reservas.services.js'
 
-const Consulta = ({rows, onRegistrar, loadData}) => {
+const Consulta = ({rows, onRegistrar, onModificar, onDelete}) => {
   
   const onClickDelete = async (reserva) => {
-    await service.deleteReserva(reserva);
-    await loadData();
+    onDelete(reserva)
   }
 
   const onClickUpdate = async (reserva) => {
-    await service.updateReserva(reserva);
-    await loadData();
+    onModificar(reserva)
   }
   
   const tbody = rows.map(e => 

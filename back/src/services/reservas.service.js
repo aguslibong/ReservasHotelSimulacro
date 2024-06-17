@@ -40,7 +40,8 @@ const create = async (reserva) => {
 
 }
 
-export const updateReserva = async (reservaEdit) => {
+const updateReserva = async (reservaEdit) => {
+    console.log(reservaEdit)
     try {
         const reserva = await sequelize.models.Reservas.findOne({
             where: {
@@ -90,5 +91,6 @@ const deleteReserva = async (idReserva) => {
 export default {
     getAll,
     create,
-    deleteReserva
+    deleteReserva,
+    updateReserva
 }

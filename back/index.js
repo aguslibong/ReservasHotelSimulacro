@@ -29,15 +29,23 @@ app.post('/reservas', async (req, res) => {
 
 app.delete('/reservas', async (req, res) => {
     try{
-       const reservaId = await service.deleteReserva(req.body)
-    return res.json(reservaId);
+       const respuesta = await service.deleteReserva(req.body)
+    return res.json(respuesta);
     }catch(error){
         console.log(error)
         res.status(500).send({mensaje: 'Ha ocurrido un error interno.'})
     }
 });
 
-
+app.put('/reservas', async (req, res) => {
+    try{
+       const respuesta = await service.updateReserva(req.body)
+    return res.json(respuesta);
+    }catch(error){
+        console.log(error)
+        res.status(500).send({mensaje: 'Ha ocurrido un error interno.'})
+    }
+});
 
 
 

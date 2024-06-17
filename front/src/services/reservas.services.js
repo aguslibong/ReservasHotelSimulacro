@@ -58,10 +58,9 @@ const deleteReserva = async (reserva) => {
 }
 
 const updateReserva = async (reserva) => {
-    console.log(reserva)
     try {
         const requestOptions = {
-            method: 'UPDATE',
+            method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(reserva)
         };
