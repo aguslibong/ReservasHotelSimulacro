@@ -1,6 +1,6 @@
 const URL = 'http://localhost:3001/reservas';
 
-export const getReservas = async() => {
+const getReservas = async() => {
     try {
         const res = await fetch(URL);
         if (!res.ok) {
@@ -14,8 +14,7 @@ export const getReservas = async() => {
     }
 }
 
-export const saveReserva = async(reserva) => {
-    console.log(reserva)
+const saveReserva = async(reserva) => {
     try {
         const requestOptions = {
             method: 'POST',
@@ -35,4 +34,27 @@ export const saveReserva = async(reserva) => {
     }
 }
 
-export default { getReservas, saveReserva };
+const deleteReserva = async (reserva) => {
+    console.log(reserva)
+    try {
+        const requestOptions = {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(reserva)
+        };
+
+        const res = await fetch(URL, requestOptions);
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.error('Error Elminando reserva:', error);
+        return null;
+    }
+}
+
+
+
+export default {getReservas,saveReserva,deleteReserva}

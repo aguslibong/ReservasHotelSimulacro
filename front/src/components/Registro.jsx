@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { getReservas, saveReserva } from '../services/reservas.services.js';
+import service from '../services/reservas.services.js';
 import Consulta from './Consulta.jsx';
 
 export default function Registro() {
@@ -13,14 +13,14 @@ export default function Registro() {
   }, []);
 
   const loadData = async () => {
-    const data = await getReservas();
+    const data = await service.getReservas();
     setRows(data);
   };
 
   const onSubmit = async (data) => {
     console.log(data)
     // Llamar a saveReserva del servicio de reservas
-    await saveReserva(data);
+    await service.saveReserva(data);
     loadData();
     setAction('C');
   };
@@ -28,6 +28,10 @@ export default function Registro() {
   const onVolver = () => {
     setAction('R');
   };
+
+  const onDelete = () => {
+    loadData();
+  }
 
   return (
     <div className='container_app'>
@@ -71,7 +75,7 @@ export default function Registro() {
       }
       {
         action !== 'R' && (
-          <Consulta rows={rows} onVolver={onVolver} />
+          <Consulta rows={rows} onVolver={onVolver} onDelete={onDelete} />
         )
       }
     </div>

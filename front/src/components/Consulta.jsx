@@ -1,16 +1,26 @@
 import React from 'react';
+import './Consulta.css'
 import service from '../services/reservas.services.js'
 
-const Consulta = ({rows, onVolver}) => {
-
+const Consulta = ({rows, onVolver, onDelete}) => {
+    
+  
+    const OnclickDelete =( reserva )=>{
+      service.deleteReserva(reserva)
+      onDelete()
+    }
     
     const tbody = rows.map(e => 
         <tr key={e.Id}>
-             <td>{e.Dni}</td>
+            <td>{e.Dni}</td>
             <td>{e.FechaIngreso}</td>
             <td>{e.FechaSalida}</td>
             <td>{e.TipoEstadia}</td>
             <td>{e.Huespedes}</td>
+            <td>
+              <button type="button" className ="btn btn-secondary" >Modificar</button>
+              <button type="button" className="btn btn-danger" onClick={() => OnclickDelete(e)}>Eliminar</button>
+            </td>
         </tr>
     )
 
@@ -18,7 +28,7 @@ const Consulta = ({rows, onVolver}) => {
   return (
     <div className="container mt-5">
       <div className="p-3 mb-2 bg-primary text-white rounded">
-        <h2 className="mb-0" style={{ fontFamily: 'monospace' }}>Componente Consulta.jsx</h2>
+        <h2 className="mb-0" style={{ fontFamily: 'monospace' }}>RESERVAS</h2>
       </div>
       <table className="table table-bordered">
         <thead className="bg-light">
@@ -28,6 +38,7 @@ const Consulta = ({rows, onVolver}) => {
             <th scope="col">Fecha salida</th>
             <th scope="col">Tipo servicio</th>
             <th scope="col">Huéspedes</th>
+            <th scope="col">Opciones</th>
           </tr>
         </thead>
         <tbody>
